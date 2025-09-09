@@ -13,6 +13,18 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
+        :root {
+            --primary: #2563eb;
+            --secondary: #0ea5e9;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --accent: #f97316;
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+        
         body {
             background: linear-gradient(135deg, #0f172a, #1e293b);
             color: var(--light);
@@ -37,19 +49,22 @@
         
         header h1 {
             font-size: 2.2rem;
-            color: #2c3e50;
+            color: var(--light);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         
         .contact-form-wrapper {
-            background: white;
+            background: rgba(30, 41, 59, 0.8);
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
             position: relative;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .contact-form h3 {
-            color: #2c3e50;
+            color: var(--secondary);
             margin-bottom: 20px;
             text-align: center;
             font-size: 1.8rem;
@@ -62,23 +77,25 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            color: #2c3e50;
+            color: var(--light);
             font-weight: 500;
         }
         
         .form-control {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #ddd;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--gray);
             border-radius: 5px;
             font-size: 1rem;
-            transition: border 0.3s ease;
+            transition: var(--transition);
+            color: var(--light);
         }
         
         .form-control:focus {
             outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
         }
         
         textarea.form-control {
@@ -87,14 +104,14 @@
         }
         
         .submit-btn {
-            background: #3498db;
+            background: var(--secondary);
             color: white;
             border: none;
             padding: 12px 25px;
             border-radius: 5px;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             display: block;
             width: 100%;
             font-weight: 600;
@@ -102,19 +119,19 @@
         }
         
         .submit-btn:hover {
-            background: #2980b9;
+            background: var(--primary);
             transform: translateY(-2px);
         }
         
         .back-btn {
-            background: #95a5a6;
-            color: white;
-            border: none;
+            background: var(--dark);
+            color: var(--light);
+            border: 1px solid var(--secondary);
             padding: 12px 25px;
             border-radius: 5px;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             display: block;
             width: 100%;
             font-weight: 600;
@@ -123,7 +140,7 @@
         }
         
         .back-btn:hover {
-            background: #7f8c8d;
+            background: var(--primary);
             transform: translateY(-2px);
         }
         
@@ -135,19 +152,21 @@
         }
         
         .alert-success {
-            background-color: #d4edda;
-            color: #155724;
+            background-color: rgba(25, 135, 84, 0.2);
+            color: #75b798;
+            border: 1px solid rgba(25, 135, 84, 0.3);
         }
         
         .alert-danger {
-            background-color: #f8d7da;
-            color: #721c24;
+            background-color: rgba(220, 53, 69, 0.2);
+            color: #ea868f;
+            border: 1px solid rgba(220, 53, 69, 0.3);
         }
         
         footer {
             text-align: center;
             margin-top: 30px;
-            color: #7f8c8d;
+            color: var(--gray);
             padding: 15px 0;
         }
         
@@ -155,16 +174,32 @@
             display: flex;
             flex-direction: column;
         }
+        
+        .form-icon {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .form-icon i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            background: rgba(14, 165, 233, 0.1);
+            padding: 15px;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Contact Form</h1>
+            <h1>Contact Me</h1>
         </header>
         
         <div class="contact-form-wrapper">
             <div class="contact-form">
+                <div class="form-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
                 <h3>Send Me a Message</h3>
                 <form id="contactForm" action="https://formspree.io/f/mrbarqdr" method="POST">
                     <div class="form-group">
@@ -187,21 +222,27 @@
                     <input type="text" name="_gotcha" style="display:none">
                     <div id="form-status">
                         <div class="alert alert-success" id="form-success">
-                            Your message has been sent successfully!
+                            <i class="fas fa-check-circle"></i> Your message has been sent successfully!
                         </div>
                         <div class="alert alert-danger" id="form-error">
-                            Oops! There was a problem sending your message.
+                            <i class="fas fa-exclamation-circle"></i> Oops! There was a problem sending your message.
                         </div>
                     </div>
                     <div class="button-container">
-                        <button type="submit" class="submit-btn">Send Message</button>
-                        <!-- Replace # with your actual website URL -->
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
                         <a href="contact.html" class="back-btn">
-                            <i class="fas fa-arrow-left"></i> Go Back to Website</a>
+                            <i class="fas fa-arrow-left"></i> Go Back to Website
+                        </a>
                     </div>
                 </form>
             </div>
         </div>
+        
+        <footer>
+            <p>© 2023 MD Saif. All Rights Reserved.</p>
+        </footer>
     </div>
 
     <script>
@@ -222,13 +263,19 @@
                         isValid = false;
                         input.style.borderColor = 'red';
                     } else {
-                        input.style.borderColor = '#ddd';
+                        input.style.borderColor = '';
                     }
                 });
                 
                 if (!isValid) {
                     formError.style.display = 'block';
                     formSuccess.style.display = 'none';
+                    
+                    // Auto-hide error message after 5 seconds
+                    setTimeout(() => {
+                        formError.style.display = 'none';
+                    }, 5000);
+                    
                     return;
                 }
                 
@@ -247,6 +294,11 @@
                         formSuccess.style.display = 'block';
                         formError.style.display = 'none';
                         form.reset();
+                        
+                        // Auto-hide success message after 5 seconds
+                        setTimeout(() => {
+                            formSuccess.style.display = 'none';
+                        }, 5000);
                     } else {
                         throw new Error('Form submission failed');
                     }
@@ -254,12 +306,14 @@
                 .catch(error => {
                     formError.style.display = 'block';
                     formSuccess.style.display = 'none';
+                    
+                    // Auto-hide error message after 5 seconds
+                    setTimeout(() => {
+                        formError.style.display = 'none';
+                    }, 5000);
                 });
             });
         });
     </script>
 </body>
-
 </html>
-
-
